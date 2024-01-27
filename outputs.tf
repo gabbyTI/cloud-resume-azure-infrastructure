@@ -29,6 +29,14 @@ output "cdn_endpoint" {
   value = azurerm_cdn_endpoint.endpoint.fqdn
 }
 
+output "cdn_endpoint_name" {
+  value = azurerm_cdn_endpoint.endpoint.name
+}
+
+output "cdn_profile_name" {
+  value = azurerm_cdn_profile.profile.name
+}
+
 output "github_actions_secret" {
   value = {
     clientId      = azuread_service_principal.sp.client_id

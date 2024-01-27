@@ -15,6 +15,7 @@ resource "azurerm_linux_function_app" "function" {
   storage_account_access_key = azurerm_storage_account.storage_acct.primary_access_key
   app_settings = {
     conn_str = element(azurerm_cosmosdb_account.db.connection_strings, length(azurerm_cosmosdb_account.db.connection_strings) - 1)
+    table_name = "VisitorCountTable"
   }
   site_config {
     application_stack {
