@@ -39,7 +39,7 @@ output "cdn_profile_name" {
 
 output "github_actions_secret" {
   value = {
-    clientId      = azuread_service_principal.sp.client_id
+    clientId       = azuread_service_principal.sp.client_id
     clientSecret   = azuread_application_password.password.value
     subscriptionId = data.azurerm_client_config.current.subscription_id
     tenantId       = data.azurerm_client_config.current.tenant_id

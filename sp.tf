@@ -7,7 +7,7 @@ data "azurerm_role_definition" "builtin" {
 
 resource "azurerm_role_assignment" "rbac" {
   name               = "6ca4bb53-9bc1-bbbf-5473-4b0f8b663dee"
-  scope              = azurerm_resource_group.rg.id
+  scope              = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
   role_definition_name = data.azurerm_role_definition.builtin.name
   principal_id       = azuread_service_principal.sp.id
   principal_type     = "ServicePrincipal"
