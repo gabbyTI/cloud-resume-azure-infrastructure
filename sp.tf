@@ -42,5 +42,5 @@ resource "azuread_application_federated_identity_credential" "example" {
   description    = "Deployments for cloud resume infrastructure"
   audiences      = ["api://AzureADTokenExchange"]
   issuer         = "https://token.actions.githubusercontent.com"
-  subject        = "repo:gabbyTI/cloud-resume-azure-infrastructure:environment:Production"
+  subject        = "repo:gabbyTI/cloud-resume-azure-infrastructure:ref:refs/heads/main"
 }
