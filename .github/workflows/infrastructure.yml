@@ -2,11 +2,11 @@ name: CI
 on:
   push:
     branches: [main]
-    
+
 permissions:
-      contents: 'read'
-      id-token: 'write'
-      
+  contents: 'read'
+  id-token: 'write'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,13 +15,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v3
-      
+
+      # - name: Azure Login
+      #   uses: azure/login@v1
+      #   with:
+      #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Azure Login
-        uses: azure/login@v1
+        uses: azure/CLI@v1
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
+          inlineScript: |
+            az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Initialize terraform configuration
         run: terraform init
@@ -29,5 +35,8 @@ jobs:
       - name: Validate terraform configuration
         run: terraform validate
 
+      - name: Plan terraform configuration
+        run: terraform plan -refresh=false
+
       - name: Apply terraform configuration
-        run: terraform apply -refresh=false  -auto-approve
+        run: terraform apply -refresh=false -auto-approve
