@@ -7,6 +7,11 @@ permissions:
   contents: 'read'
   id-token: 'write'
 
+env:
+  ARM_CLIENT_ID: '${{ secrets.AZURE_CLIENT_ID }}'
+  ARM_SUBSCRIPTION_ID: '${{ secrets.AZURE_SUBSCRIPTION_ID }}'
+  ARM_TENANT_ID: '${{ secrets.AZURE_TENANT_ID }}'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,11 +28,11 @@ jobs:
       #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
       #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Azure Login
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+      # - name: Azure Login
+      #   uses: azure/CLI@v1
+      #   with:
+      #     inlineScript: |
+      #       az login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
 
       - name: Initialize terraform configuration
         run: terraform init
