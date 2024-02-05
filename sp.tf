@@ -15,8 +15,8 @@ resource "azurerm_role_assignment" "rbac" {
   name                 = random_uuid.rbac_name.result
   scope                = data.azurerm_subscription.primary.id
   role_definition_name = data.azurerm_role_definition.builtin.name
-  principal_id         = azuread_service_principal.sp.object_id
-  # principal_id         = azuread_service_principal.sp.id
+  # principal_id         = azuread_service_principal.sp.object_id
+  principal_id         = azuread_service_principal.sp.id
   principal_type       = "ServicePrincipal"
 }
 
@@ -36,11 +36,11 @@ resource "azuread_application_password" "password" {
   application_id = azuread_application.git.id
 }
 
-resource "azuread_application_federated_identity_credential" "fed_id" {
-  application_id = azuread_application.git.id
-  display_name   = "infrastructure-deploy"
-  description    = "Deployments for cloud resume infrastructure"
-  audiences      = ["api://AzureADTokenExchange"]
-  issuer         = "https://token.actions.githubusercontent.com"
-  subject        = "repo:gabbyTI/cloud-resume-azure-infrastructure:ref:refs/heads/main"
-}
+# resource "azuread_application_federated_identity_credential" "fed_id" {
+#   application_id = azuread_application.git.id
+#   display_name   = "infrastructure-deploy"
+#   description    = "Deployments for cloud resume infrastructure"
+#   audiences      = ["api://AzureADTokenExchange"]
+#   issuer         = "https://token.actions.githubusercontent.com"
+#   subject        = "repo:gabbyTI/cloud-resume-azure-infrastructure:ref:refs/heads/main"
+# }
