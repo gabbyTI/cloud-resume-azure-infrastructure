@@ -36,7 +36,7 @@ resource "azuread_application_password" "password" {
   application_id = azuread_application.git.id
 }
 
-resource "azuread_application_federated_identity_credential" "example" {
+resource "azuread_application_federated_identity_credential" "fed_id" {
   application_id = azuread_application.git.id
   display_name   = "infrastructure-deploy"
   description    = "Deployments for cloud resume infrastructure"
