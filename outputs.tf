@@ -43,7 +43,6 @@ output "github_actions_secret" {
     clientSecret   = azuread_application_password.password.value
     subscriptionId = data.azurerm_client_config.current.subscription_id
     tenantId       = data.azurerm_client_config.current.tenant_id
-    objectId       = azuread_service_principal.sp.object_id
   }
   sensitive = true
 }

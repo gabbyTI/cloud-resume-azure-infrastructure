@@ -10,8 +10,3 @@ resource "azurerm_storage_account" "storage_acct" {
     error_404_document = "error/404.html"
   }
 }
-
-# resource "azurerm_storage_container" "web" {
-#   # name                 = "$web"
-#   # storage_account_name = azurerm_storage_account.storage_acct.name
-# }
